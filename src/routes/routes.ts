@@ -215,9 +215,9 @@ export const OTHER_PAGES_ROUTES = {
 
 export const MY_PAGES_ROUTES = {
   TEST_PAGE: "/tanvir/test",
-  MENU:"/settings/menu",
-    ROLE:"/settings/roles",
-        ASSIGN_ROLE_EMPLOYEE:"/settings/assign-roles-employee"
+  MENU: "/settings/menu",
+  ROLE: "/settings/roles",
+  ASSIGN_ROLE_EMPLOYEE: "/settings/assign-roles-employee"
 
 
 };
@@ -226,4 +226,12 @@ export const SMART_CLASS_ROUTINE_ROUTES = {
   CLASS_ROUTINE: "/classRoutine",
   COURSE: "/classRoutine/course",
   DEPARTMENT: "/classRoutine/department",
+};
+
+
+export const TMS_ROUTES = {
+  CREATE_TASK: "/tms/create-task",
+  ASSIGN_TASK_EMPLOYEE:"/tms/assign-task-employee",
+
+
 };

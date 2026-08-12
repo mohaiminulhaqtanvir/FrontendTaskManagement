@@ -17,6 +17,7 @@ import {
   READY_T0_USE_ROUTES,
   SMART_CLASS_ROUTINE_ROUTES,
   TABLES_ROUTES,
+  TMS_ROUTES,
   UI_KITS_ROUTES,
   WIDGETS_PAGE,
 } from "@/routes/routes";
@@ -331,13 +332,15 @@ const Department = React.lazy(() => import("@/modules/SmartClassRoutine/departme
 
 const Course = React.lazy(() => import("@/modules/SmartClassRoutine/course"));
 
-const Menu = React.lazy(() => import("@/modules/tms/menu"));
+const Menu = React.lazy(() => import("@/modules/Settings/menu"));
 
-const Role = React.lazy(() => import("@/modules/tms/role"));
+const Role = React.lazy(() => import("@/modules/Settings/role"));
 
-const RoleAssignEmployee = React.lazy(() => import("@/modules/tms/rolesAssignEmployee"));
+const RoleAssignEmployee = React.lazy(() => import("@/modules/Settings/rolesAssignEmployee"));
 
 
+const CreateTask = React.lazy(() => import("@/modules/tms/createTask"));
+const AssignTaskEmployee = React.lazy(() => import("@/modules/tms/assignTaskEmployee"));
 
 
 
@@ -570,13 +573,15 @@ const routes = [
   },
   //----------------------------------// my //---------------------------//
 
-    { path: MY_PAGES_ROUTES.TEST_PAGE, component: <Tanvir /> },
-        { path: MY_PAGES_ROUTES.MENU, component: <Menu /> },
-                { path: MY_PAGES_ROUTES.ROLE, component: <Role /> },
+  { path: MY_PAGES_ROUTES.TEST_PAGE, component: <Tanvir /> },
+  { path: MY_PAGES_ROUTES.MENU, component: <Menu /> },
+  { path: MY_PAGES_ROUTES.ROLE, component: <Role /> },
 
-                                { path: MY_PAGES_ROUTES.ASSIGN_ROLE_EMPLOYEE, component: <RoleAssignEmployee /> },
+  { path: MY_PAGES_ROUTES.ASSIGN_ROLE_EMPLOYEE, component: <RoleAssignEmployee /> },
 
+  { path: TMS_ROUTES.CREATE_TASK, component: <CreateTask /> },
 
+  { path: TMS_ROUTES.ASSIGN_TASK_EMPLOYEE, component: <AssignTaskEmployee /> },
 
 
 
