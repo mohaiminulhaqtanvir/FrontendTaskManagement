@@ -26,7 +26,7 @@ const initMeta: IMeta = {
   sort: [
     {
       order: "asc",
-      field: "createdOn",
+      field: "createdDate",
     },
   ],
 };
@@ -98,24 +98,28 @@ const TaskCreate = () => {
 
   const getDataList = (reqMeta = null) => {
     const payload = {
-      // meta: searchKey
-      //   ? reqMeta
-      //     ? { ...reqMeta }
-      //     : { ...respMeta, page: 0 }
-      //   : reqMeta || respMeta,
+      meta: searchKey
+        ? reqMeta
+          ? { ...reqMeta }
+          : { ...respMeta, page: 0 }
+        : reqMeta || respMeta,
       body: {
-        // searchKey: searchKey,
+        searchKey: searchKey,
       },
     };
-    ReportService.tsskList({ keyword: searchKey }).then((res) => {
-      setListData(res?.data || []);
-      // setRespMeta(
-      //   res?.data?.meta
-      //     ? { ...res?.data?.meta }
-      //     : { limit: respMeta?.limit, page: 0 }
-      // );
-    });
-    // .catch((err) => toast.error(err?.message))
+    ReportService.tsskListWithPazination(payload)
+      .then((res) => {
+        setListData(res?.data?.content || []);
+        setRespMeta(
+          res?.data?.meta
+            ? {
+                ...res?.data?.meta,
+                sort: [{ order: "asc", field: "createdDate" }],
+              }
+            : { limit: respMeta?.limit, page: 0 }
+        );
+      })
+      .catch((err) => toast.error(err?.message));
   };
 
   const onPageChanged = (metaParams: IMeta) => {

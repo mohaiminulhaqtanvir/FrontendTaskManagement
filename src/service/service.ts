@@ -144,6 +144,12 @@ export const ReportService = {
   tsskList: async (payload: any): Promise<any> =>
     await axios.post("http://localhost:8080/service2/tasks/search", payload),
 
+  tsskListWithPazination: async (payload: any): Promise<any> =>
+    await axios.post(
+      "http://localhost:8080/service2/tasks/search-pagination",
+      payload
+    ),
+
   tsskFilterList: async (payload: any): Promise<any> =>
     await axios.post("http://localhost:8080/service2/tasks/filter", payload),
 
