@@ -11,68 +11,54 @@ import { TableCell } from "@/components/myComponant/TableFor/TableCell";
 import { TableRow } from "@/components/myComponant/TableFor/TableRow";
 import { numEnToBn } from "@/components/myComponant/input/checkValidation";
 
-import DetailsTable from "./DetailsTable";
-
 const columns: ITableHeadColumn[] = [
   { title: "", width: 20 },
 
   { title: "ক্রমিক নং", width: 100 },
-  { title: "মেনুর নাম", width: 200 },
-  { title: "মেনুর ধরন", minWidth: 150 },
-  { title: "আইকন", minWidth: 120 },
-  { title: "পাথ", minWidth: 120 },
-  { title: "প্যারেন্ট", minWidth: 120 },
-  { title: "অ্যাকশন", minWidth: 20, className: "d-flex justify-content-center" },
+  { title: "রোলের নাম", width: 300 },
+  { title: "রোলের নাম", width: 400 },
+
+  { title: "রোলের নাম", width: 400 },
+
+  { title: "অ্যাকশন", minWidth: 20, className: "d-flex justify-content-end" },
 ];
-interface CourseTableProps {
+interface RoleTableProps {
   children?: ReactNode;
   tableData?: any[];
   title?: string;
   handleUpdate: (data) => void;
-   deleteUpdate: (data) => void;
-
+  roleData?: any;
 }
-const CourseTable: FC<CourseTableProps> = ({
+const RoleTable: FC<RoleTableProps> = ({
   tableData,
   children,
-  handleUpdate,deleteUpdate
+  handleUpdate,
+  roleData,
 }) => {
   if (!tableData?.length) return null;
 
   return (
     <Card>
       <Card.Header>
-        <h5>মেনু তালিকা</h5>
+        <h5>রোলের তালিকা</h5>
       </Card.Header>
       <Card.Body className="p-0">
         <Table columns={columns}>
           {tableData?.map((item: any, i: number) => (
-            <TableRow
-              key={item?.id || i}
-              details={
-                item?.children?.length > 0 ? (
-                  <DetailsTable
-                    tableData={item}
-                    handleUpdate={handleUpdate}
-                    children={children}
-                    deleteUpdate={deleteUpdate}
-                  />
-                ) : null
-              }
-            >
+            <TableRow key={item?.id || i}>
               <TableCell text={numEnToBn(i + 1)} />
 
-              <TableCell text={item?.name || "তথ্য নেই "} />
-              <TableCell text={item?.type || "তথ্য নেই "} />
+              <TableCell text={item?.username || "তথ্য নেই "} />
 
-              <TableCell text={item?.iconClass || "তথ্য নেই "} />
-
-              <TableCell text={item?.path || "তথ্য নেই "} />
-                 <TableCell text={item?.createdOn || "তথ্য নেই "} />
-
+              <TableCell text={item?.email || "তথ্য নেই "} />
+              <TableCell
+                text={
+                  item?.roles?.map((e) => e?.name)?.join(",  ") || "তথ্য নেই "
+                }
+              />
 
               <TableCell className="p-0 m-0 ">
-                <div className="d-flex justify-content-center align-items-center">
+                <div className="d-flex justify-content-end mx-3">
                   <Dropdown
                     className="p-0 m-0"
                     btnContent={
@@ -93,16 +79,6 @@ const CourseTable: FC<CourseTableProps> = ({
                         সম্পাদনা করুন
                       </h6>
                     </DropdownItem>
-                      <DropdownItem
-                      onClick={() => {
-                        deleteUpdate(item);
-                      }}
-                    >
-                      <Icon size={16} icon="delete" color="danger" />
-                      <h6 className="mb-0 ms-2" style={{ fontSize: 16 }}>
-                       ডিলিট করুন 
-                      </h6>
-                    </DropdownItem>
                   </Dropdown>
                 </div>
               </TableCell>
@@ -115,4 +91,4 @@ const CourseTable: FC<CourseTableProps> = ({
   );
 };
 
-export default CourseTable;
+export default RoleTable;
