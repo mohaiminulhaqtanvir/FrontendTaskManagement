@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
+import { ReportService } from "@/service/service";
 import { Cardholder } from "phosphor-react";
 
 import Breadcrumbs from "@/components/breadcrumb/Breadcrumb";
@@ -15,10 +17,8 @@ import {
   useDebounce,
 } from "@/components/myComponent/interface/common.interface";
 
-import RoleForm from "./Form";
-import RoleTable from "./Table";
-import { ReportService, RoleService } from "@/service/service";
-import { toast } from "react-toastify";
+import TaskCreateForm from "./Form";
+import TaskCreateTable from "./Table";
 
 const initMeta: IMeta = {
   page: 0,
@@ -30,7 +30,7 @@ const initMeta: IMeta = {
     },
   ],
 };
-const Role = () => {
+const TaskCreate = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -62,22 +62,29 @@ const Role = () => {
 
   const onDrawerClose = () => {
     setIsDrawerOpen(false);
-    setUpdateData({})
-        setIsUpdate(false);
-
+    setUpdateData({});
+    setIsUpdate(false);
   };
+  let username = localStorage?.getItem("userInfo") || "";
+
+  let userInfo = JSON.parse(username || "[]"); // Ensure it defaults to an empty array
+  console.log(userInfo);
 
   const onSubmit = (data) => {
-    delete data.parentDto
-        delete data.current
-const service  = isUpdate?RoleService?.RolesUpdate:RoleService?.RolesCreate
     console.log(data);
-service(data).then((res) => {
-getDataList()
-  onDrawerClose()
-  toast.success("lll")
-})
-    
+
+    data.status = "TODO";
+    data.createdBy = userInfo?.id;
+    data.dueDate = convertBnDateToApiDateTime(data.dueDate);
+    const service = isUpdate
+      ? ReportService?.taskUpdate(updateData?.id, data)
+      : ReportService?.tsskCreate({ ...data });
+    console.log(data);
+    service.then((res) => {
+      getDataList();
+      onDrawerClose();
+      toast.success("lll");
+    });
   };
 
   const onCancelModal = () => {
@@ -100,7 +107,7 @@ getDataList()
         // searchKey: searchKey,
       },
     };
-    ReportService.roleSearch({keyword:searchKey}).then((res) => {
+    ReportService.tsskList({ keyword: searchKey }).then((res) => {
       setListData(res?.data || []);
       // setRespMeta(
       //   res?.data?.meta
@@ -114,13 +121,19 @@ getDataList()
   const onPageChanged = (metaParams: IMeta) => {
     getDataList(metaParams);
   };
+  const deleteUpdate = (data: any) => {
+    ReportService?.taskDelete(data?.id).then((res) => {
+      getDataList();
+      toast.success("lll");
+    });
+  };
   return (
     <Container fluid>
       <Row>
         <Breadcrumbs
-          mainTitle="Role"
+          mainTitle="টাস্ক তৈরি"
           title="Form Elements"
-          path={["Role"]}
+          path={["TaskCreate"]}
           Icon={Cardholder}
         />
         <div className="d-flex flex-column flex-md-row gap-3 align-items-stretch">
@@ -140,16 +153,20 @@ getDataList()
         </div>
 
         <div className="mt-2">
-          <RoleTable tableData={listData} handleUpdate={handleUpdate}>
+          <TaskCreateTable
+            tableData={listData}
+            handleUpdate={handleUpdate}
+            deleteUpdate={deleteUpdate}
+          >
             <Pagination
               meta={respMeta}
               pageNeighbours={2}
               onPageChanged={onPageChanged}
             />{" "}
-          </RoleTable>
+          </TaskCreateTable>
         </div>
 
-        <RoleForm
+        <TaskCreateForm
           isOpen={isDrawerOpen}
           onClose={onDrawerClose}
           updateData={updateData}
@@ -160,4 +177,12 @@ getDataList()
     </Container>
   );
 };
-export default Role;
+export default TaskCreate;
+
+export const convertBnDateToApiDateTime = (date?: string) => {
+  if (!date) return null;
+
+  const [day, month, year] = date.split("/");
+
+  return `${year}-${month}-${day}T00:00:00`;
+};

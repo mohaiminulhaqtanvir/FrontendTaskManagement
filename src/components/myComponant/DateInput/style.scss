@@ -1,0 +1,257 @@
+.date-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* =========================================
+   REACT DATEPICKER
+========================================= */
+
+.date-input-wrapper .react-datepicker-wrapper {
+  display: block;
+  width: 100%;
+}
+
+.date-input-wrapper .react-datepicker__input-container {
+  display: block;
+  width: 100%;
+}
+
+.date-input {
+  width: 100%;
+  padding-right: 42px !important;
+}
+
+/* =========================================
+   START ICON
+========================================= */
+
+.date-input-start-icon {
+  position: absolute;
+
+  left: 16px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+/* =========================================
+   CALENDAR ICON
+========================================= */
+
+.date-input-calendar-icon {
+  position: absolute;
+
+  right: 12px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  z-index: 5;
+
+  pointer-events: none;
+
+  color: #7e8299;
+}
+
+.date-input-calendar-icon.with-clear {
+  right: 10px;
+}
+
+/* =========================================
+   CLEAR BUTTON
+========================================= */
+
+.date-input-clear {
+  position: absolute;
+
+  right: 38px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 24px;
+  height: 24px;
+
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  background: transparent;
+
+  color: #7e8299;
+
+  font-size: 22px;
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  z-index: 10;
+
+  border-radius: 50%;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* =========================================
+   CLEAR HOVER
+========================================= */
+
+.date-input-clear:hover {
+  color: #181c32;
+
+  background-color: #f1f1f4;
+}
+
+/* =========================================
+   CLEAR ACTIVE
+========================================= */
+
+.date-input-clear:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+/* =========================================
+   CLEAR FOCUS
+========================================= */
+
+.date-input-clear:focus {
+  outline: none;
+}
+
+/* =========================================
+   END ICON
+========================================= */
+
+.date-input-end-icon {
+  position: absolute;
+
+  right: 12px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+/* =========================================
+   REACT DATEPICKER POPUP
+========================================= */
+
+.react-datepicker {
+  border: 1px solid #e1e3ea;
+
+  border-radius: 8px;
+
+  font-family: inherit;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.react-datepicker__header {
+  background-color: #f8f9fa;
+
+  border-bottom: 1px solid #e1e3ea;
+
+  border-radius: 8px 8px 0 0;
+}
+
+/* =========================================
+   DAY
+========================================= */
+
+.react-datepicker__day {
+  border-radius: 6px;
+}
+
+.react-datepicker__day:hover {
+  border-radius: 6px;
+}
+
+/* =========================================
+   TODAY
+========================================= */
+
+.react-datepicker__day--today {
+  font-weight: 600;
+}
+
+/* =========================================
+   SELECTED
+========================================= */
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  border-radius: 6px;
+}
+
+/* =========================================
+   MONTH / YEAR DROPDOWN
+========================================= */
+
+.react-datepicker__month-select,
+.react-datepicker__year-select {
+  padding: 4px 8px;
+
+  border: 1px solid #d8dbe5;
+
+  border-radius: 5px;
+
+  background: white;
+}
+
+/* =========================================
+   DISABLED
+========================================= */
+
+.date-input:disabled {
+  cursor: not-allowed;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 576px) {
+  .date-input-clear {
+    right: 36px;
+  }
+
+  .date-input-calendar-icon {
+    right: 10px;
+  }
+}

@@ -22,20 +22,24 @@ const columns: ITableHeadColumn[] = [
   { title: "আইকন", minWidth: 120 },
   { title: "পাথ", minWidth: 120 },
   { title: "প্যারেন্ট", minWidth: 120 },
-  { title: "অ্যাকশন", minWidth: 20, className: "d-flex justify-content-center" },
+  {
+    title: "অ্যাকশন",
+    minWidth: 20,
+    className: "d-flex justify-content-center",
+  },
 ];
 interface CourseTableProps {
   children?: ReactNode;
   tableData?: any[];
   title?: string;
   handleUpdate: (data) => void;
-   deleteUpdate: (data) => void;
-
+  deleteUpdate: (data) => void;
 }
 const CourseTable: FC<CourseTableProps> = ({
   tableData,
   children,
-  handleUpdate,deleteUpdate
+  handleUpdate,
+  deleteUpdate,
 }) => {
   if (!tableData?.length) return null;
 
@@ -68,8 +72,7 @@ const CourseTable: FC<CourseTableProps> = ({
               <TableCell text={item?.iconClass || "তথ্য নেই "} />
 
               <TableCell text={item?.path || "তথ্য নেই "} />
-                 <TableCell text={item?.createdOn || "তথ্য নেই "} />
-
+              <TableCell text={item?.createdOn || "তথ্য নেই "} />
 
               <TableCell className="p-0 m-0 ">
                 <div className="d-flex justify-content-center align-items-center">
@@ -93,14 +96,14 @@ const CourseTable: FC<CourseTableProps> = ({
                         সম্পাদনা করুন
                       </h6>
                     </DropdownItem>
-                      <DropdownItem
+                    <DropdownItem
                       onClick={() => {
                         deleteUpdate(item);
                       }}
                     >
                       <Icon size={16} icon="delete" color="danger" />
                       <h6 className="mb-0 ms-2" style={{ fontSize: 16 }}>
-                       ডিলিট করুন 
+                        ডিলিট করুন
                       </h6>
                     </DropdownItem>
                   </Dropdown>
